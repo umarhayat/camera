@@ -19,6 +19,6 @@
 
     <!-- We'll include the Barcode plugin as an example -->
    
-    <gap:plugin name="org.apache.cordova.camera"/>
+    <plugin name="cordova-plugin-camera" spec="~4.0.1" />
     
 </widget>
