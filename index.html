@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'" />
+        <title>PhoneGap app</title>
+
+        <!-- Script -->
+        
+        <script type='text/javascript' src='js/jquery.js' ></script>
+        <script type='text/javascript'>
+        $(document).ready(function(){
+
+            // Take photo from camera
+            $('#but_take').click(function(){
+                navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
+                    destinationType: Camera.DestinationType.FILE_URL 
+                });
+            });
+
+            // Select from gallery 
+            $("#but_select").click(function(){
+                navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY, 
+                    allowEdit: true,
+                    destinationType: Camera.DestinationType.FILE_URI
+                });
+            });
+
+            // Change image source
+            function onSuccess(imageData) {
+                var image = document.getElementById('img');
+                image.src = imageData + '?' + Math.random();;
+            }
+
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
+
+        });
+        </script>
+    </head>
+    <body>
+        <div style="margin:0 auto; width:30%!important;text-align: center;">
+            <img src="img/cam2.jpg" id='img' style="width: 100px; height: 100px;">
+        </div><br/>
+        <div style="width:100%; text-align:center; padding:10px;">
+            <button id='but_take'>Take photo</button>
+            <button id='but_select'>Select photo from Gallery</button>
+        </div>
+    </body>
+</html>
